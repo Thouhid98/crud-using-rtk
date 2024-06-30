@@ -94,23 +94,15 @@ export const userDetail = createSlice({
     users: [],
     loading: false,
     error: null,
+    searchData: [],
   },
-  //   reducers: {},
 
-  //   extraReducers: {
-  //     [createUser.pending]: (state) => {
-  //       state.loading = false;
-  //     },
-  //     [createUser.fulfilled]: (state, action) => {
-  //       state.loading = false;
-  //       state.users.push(action.payload);
-  //     },
-  //     [createUser.rejected]: (state, action) => {
-  //       state.loading = false;
-  //       state.error = action.payload.message;
-  //     },
-  //   },
-  reducers: {},
+  reducers: {
+    searchUser: (state, action) => {
+      state.searchData = action.payload;
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state) => {
@@ -167,3 +159,4 @@ export const userDetail = createSlice({
 });
 
 export default userDetail.reducer;
+export const { searchUser } = userDetail.actions;

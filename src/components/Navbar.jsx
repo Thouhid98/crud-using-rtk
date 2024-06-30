@@ -1,8 +1,18 @@
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { searchUser } from "../features/userDetailSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const allusers = useSelector((state) => state.app.users);
+  const [searchData, setSearchData] = useState("");
+
+  // Here sending the data using useEffect ,dispatch and searchdata is a reducer
+  useEffect(() => {
+    dispatch(searchUser(searchData));
+  }, [searchData]);
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,9 +34,11 @@ const Navbar = () => {
             </ul>
             <input
               className="form-control me-2 w-50"
-              type="search"
+              type="text"
               placeholder="Search"
               aria-label="Search"
+              value={searchData}
+              onChange={(e) => setSearchData(e.target.value)}
             />
           </div>
         </div>
